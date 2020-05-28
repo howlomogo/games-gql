@@ -33,3 +33,9 @@ price (float?)
 
 - Listed Games (This will turn into users, with password, username etc and the list, but for now lets just have 1)
 listedGames (Array)
+
+
+
+To use:
+Create mongodb db gamesdb with collection games
+Run mongodb, run npm server
