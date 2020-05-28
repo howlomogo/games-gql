@@ -1,0 +1,40 @@
+{
+    "userDbMock": [
+    {
+      "id": 0,
+      "firstname": "Bob",
+      "middlename": "Edward",
+      "surname": "Picher",
+      "age": 64,
+      "friends": [
+        "Tony",
+        "John",
+        "Pete"
+      ]
+    },
+    {
+      "id": 1,
+      "firstname": "Christine",
+      "middlename": "Jayne",
+      "surname": "Picher",
+      "age": 61,
+      "friends": [
+        "Ann",
+        "Kirsty"
+      ]
+    },
+    {
+      "id": 2,
+      "firstname": "Matt",
+      "surname": "Picher",
+      "age": 33,
+      "friends": [
+        "Jim",
+        "Qing",
+        "Billy",
+        "Sam",
+        "Peter"
+      ]
+    }
+  ]
+}
