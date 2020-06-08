@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class SortTile extends Component {
   render() {
-    return (  
+    return (
       <div className='d-flex align-items-center py-3 border-top border-bottom mb-3'>
         <div className='flex-fill'>
           <p className='m-0'>
@@ -15,9 +15,9 @@ export class SortTile extends Component {
               Dropdown button
             </button>
             <div className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-              <a className='dropdown-item' href='#'>Action</a>
-              <a className='dropdown-item' href='#'>Another action</a>
-              <a className='dropdown-item' href='#'>Something else here</a>
+              <a className='dropdown-item' href='#1'>Action</a>
+              <a className='dropdown-item' href='#2'>Another action</a>
+              <a className='dropdown-item' href='#3'>Something else here</a>
             </div>
           </div>
         </div>

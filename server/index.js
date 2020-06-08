@@ -1,6 +1,7 @@
 var express = require('express')
 var graphqlHTTP = require('express-graphql')
 var graphql = require('graphql')
+var cors = require('cors')
 const db = require('./db')
 
 const UserType = require('./types/user.js')
@@ -17,6 +18,10 @@ db.connect(() => {
 })
 
 var app = express()
+
+// allow cors for 3000/4000 working together
+app.use(cors())
+
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true

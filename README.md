@@ -1,4 +1,4 @@
-Simple GraphQL project with local mongo database, React, Apollo.
+Simple GraphQL project with local mongo database, React, Apollo (NOT react hooks version).
 
 Games database
 User can search for games in database with various filters
@@ -34,7 +34,7 @@ price (float?)
 - Listed Games (This will turn into users, with password, username etc and the list, but for now lets just have 1)
 listedGames (Array)
 
-
+- pagination for list view,
 
 To use:
 Create mongodb db gamesdb with collection games
