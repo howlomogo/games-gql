@@ -1,6 +1,22 @@
 import React, { Component } from 'react'
+import AmendForm from './AmendForm'
 
-export class GameTile extends Component {
+class GameTile extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      amendToggled: false
+    }
+    this.toggleAmend = this.toggleAmend.bind(this)
+  }
+
+  toggleAmend() {
+    this.setState({
+      amendToggled: !this.state.amendToggled
+    })
+  }
+
   render() {
     return (
       <div className='card flex-row flex-wrap mb-3'>
@@ -16,15 +32,27 @@ export class GameTile extends Component {
         </div>
         <div className='w-100'></div>
         <div className='card-footer w-100 text-muted'>
-          <div className='d-flex align-items-center'>
-            <div className='flex-fill'>
-              <p className='m-0'>Moderator Area</p>
+          {this.state.amendToggled ? (
+            <AmendForm
+              _id={this.props._id}
+              name={this.props.name}
+              image={this.props.image}
+              description={this.props.description}
+              release_date={this.props.release_date}
+              platform={this.props.platform}
+              price={this.props.price}
+            />
+          ) : (
+            <div className='d-flex align-items-center'>
+              <div className='flex-fill'>
+                <p className='m-0'>Moderator Area</p>
+              </div>
+              <div className='flex-fill text-right'>
+                <a href='#1' className='btn btn-primary mr-2' onClick={() => {this.toggleAmend()}}>Amend Game</a>
+                <a href='#2' className='btn btn-danger'>Remove Game</a>
+              </div>
             </div>
-            <div className='flex-fill text-right'>
-              <a href='#1' className='btn btn-primary mr-2'>Amend Game</a>
-              <a href='#2' className='btn btn-danger'>Remove Game</a>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     )

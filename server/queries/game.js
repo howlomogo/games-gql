@@ -46,6 +46,7 @@ const game_query = {
 
     const games = await db.get().collection('games').find(db_query).toArray()
       .then((response) => {
+        console.log('--response', response)
         return response
       })
 

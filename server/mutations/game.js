@@ -84,6 +84,8 @@ const game_mutation = new graphql.GraphQLObjectType({
           $set: db_query
         })
 
+
+
         // TODO add validation / error checking
         // We are just assuming it was successful.
         return `${name} has been updated using the details provided`

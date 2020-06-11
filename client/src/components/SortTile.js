@@ -12,12 +12,12 @@ export class SortTile extends Component {
         <div className='flex-fill text-right'>
           <div className='dropdown'>
             <button className='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-              Dropdown button
+              Sort By
             </button>
             <div className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-              <a className='dropdown-item' href='#1'>Action</a>
-              <a className='dropdown-item' href='#2'>Another action</a>
-              <a className='dropdown-item' href='#3'>Something else here</a>
+              <a className='dropdown-item' href='#3'>Price</a>
+              <a className='dropdown-item' href='#1'>Name</a>
+              <a className='dropdown-item' href='#2'>Release Date</a>
             </div>
           </div>
         </div>

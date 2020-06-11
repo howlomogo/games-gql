@@ -13,22 +13,22 @@ const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql'
 })
 
-// query GetGameByIdQuery {
-//   game(_id:"5ecc9d5bcc491bc8b315dffc") {
-//     name
-//     image
-//     description
-//     release_date
-//     platform
-//     price
-//   }
-// }
-
-// TODO get queries working with form fields.
-
-const GET_GAME_BY_ID = gql`
-  query GetGameByIdQuery {
-    game {
+const GET_GAMES = gql`
+  query GetGameByIdQuery(
+    $name: String,
+    $release_date: Int,
+    $platform: String,
+    $min_price: Float,
+    $max_price: Float
+  ) {
+    game(
+      name: $name,
+      release_date: $release_date,
+      platform: $platform,
+      min_price: $min_price,
+      max_price: $max_price
+    ) {
+      _id
       name
       image
       description
@@ -44,12 +44,19 @@ class App extends Component {
     super()
 
     this.state = {
+      inputValues: {
+        name: '',
+        platform: '',
+        releaseDate: '',
+        minPrice: '',
+        maxPrice: ''
+      },
       searchParams: {
         name: '',
         platform: '',
         releaseDate: '',
-        minPrice: null,
-        maxPrice: null
+        minPrice: '',
+        maxPrice: ''
       }
     }
 
@@ -57,28 +64,26 @@ class App extends Component {
     this.handleFormChange = this.handleFormChange.bind(this)
   }
 
-  componentDidMount() {
-    // Let's just initially get all the games
-
-  }
-
   handleFormChange(e) {
-    console.log(e.target.id)
+    console.log(Number(e.target.value).toPrecision(4))
     this.setState({
-      searchParams: {
-        ...this.state.searchParams,
-        [e.target.id]: e.target.value
+      inputValues: {
+        ...this.state.inputValues,
+        [e.target.id]: e.target.id === ('releaseDate' || 'minPrice' || 'maxPrice') ? Number(e.target.value) : e.target.value
       }
     }, () => {
       console.log(this.state)
     })
   }
 
+  // Set searchParams as the inputValues, this will then update the Apollo Query
   handleFilterSubmit(e) {
     e.preventDefault()
-    console.log('hello')
-
-    // Here we need to do the filtering
+    this.setState({
+      searchParams: {
+        ...this.state.inputValues
+      }
+    })
   }
 
   render() {
@@ -92,21 +97,35 @@ class App extends Component {
                 <FilterTile
                   handleFilterSubmit={this.handleFilterSubmit}
                   handleFormChange={this.handleFormChange}
-                  searchParams={this.state.searchParams}
+                  inputValues={this.state.inputValues}
                 />
                 <SortTile />
 
-                <Query query={GET_GAME_BY_ID}>
+                <Query
+                  query={GET_GAMES}
+                  variables={{
+                    name: this.state.searchParams.name,
+                    release_date: Number(this.state.searchParams.releaseDate),
+                    platform: this.state.searchParams.platform,
+                    min_price: Number(this.state.searchParams.minPrice),
+                    max_price: Number(this.state.searchParams.maxPrice)
+                  }}
+                >
                   {
                     ({ loading, error, data }) => {
                       if(loading) return <h4>Loading...</h4>
                       if(error) console.log('---error', error)
 
+                      console.log('--data', data)
                       // Very basic atm, but we can work on this
                       return (
                         <React.Fragment>
+                        {data &&
+                          <React.Fragment>
                           {data.game.map(game => (
                             <GameTile
+                              key={game._id}
+                              _id={game._id}
                               name={game.name}
                               image={game.image}
                               description={game.description}
@@ -115,6 +134,8 @@ class App extends Component {
                               price={game.price}
                             />
                           ))}
+                          </React.Fragment>
+                        }
                         </React.Fragment>
                       )
                     }
