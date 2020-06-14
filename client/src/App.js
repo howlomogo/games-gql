@@ -8,6 +8,7 @@ import Nav from './components/Nav'
 import GameTile from './components/GameTile'
 import FilterTile from './components/FilterTile'
 import SortTile from './components/SortTile'
+import AddModal from './components/AddModal'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql'
@@ -44,12 +45,22 @@ class App extends Component {
     super()
 
     this.state = {
+      modalVisible: false,
+      addInputValues: {
+        name: '',
+        platform: '',
+        releaseYear: 0,
+        price: 0.00,
+        image: '',
+        description: ''
+      },
       inputValues: {
         name: '',
         platform: '',
-        releaseDate: '',
-        minPrice: '',
-        maxPrice: ''
+        releaseYear: '',
+        price: '',
+        image: '',
+        description: ''
       },
       searchParams: {
         name: '',
@@ -60,6 +71,7 @@ class App extends Component {
       }
     }
 
+    this.toggleModal = this.toggleModal.bind(this)
     this.handleFilterSubmit = this.handleFilterSubmit.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
   }
@@ -86,11 +98,17 @@ class App extends Component {
     })
   }
 
+  toggleModal() {
+		this.setState({ modalVisible: !this.state.modalVisible });
+	}
+
   render() {
     return (
       <ApolloProvider client={client}>
         <div className='App'>
-          <Nav />
+          <Nav
+            toggleModal={this.toggleModal}
+          />
           <div className='container'>
             <div className='row'>
               <div className='col-12'>
@@ -143,6 +161,16 @@ class App extends Component {
                 </Query>
               </div>
             </div>
+            <AddModal
+              toggleModal={this.toggleModal}
+              modalVisible={this.state.modalVisible}
+              name={this.state.addInputValues.name}
+              image={this.state.addInputValues.image}
+              description={this.state.addInputValues.description}
+              release_date={this.state.addInputValues.release_date}
+              platform={this.state.addInputValues.platform}
+              price={this.state.addInputValues.price}
+            />
           </div>
         </div>
       </ApolloProvider>

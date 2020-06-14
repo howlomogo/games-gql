@@ -15,7 +15,7 @@ export class Nav extends Component {
               <a className='nav-link' href='#test1'>Home <span className='sr-only'>(current)</span></a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='#test2'>Add Game</a>
+              <a className='nav-link' style={{cursor: 'pointer'}} onClick={this.props.toggleModal}>Add Game</a>
             </li>
           </ul>
         </div>

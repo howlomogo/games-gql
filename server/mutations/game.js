@@ -14,15 +14,17 @@ const game_mutation = new graphql.GraphQLObjectType({
         name: {type: graphql.GraphQLString},
         release_date: {type: graphql.GraphQLInt},
         platform: {type: graphql.GraphQLString},
-        price: {type: graphql.GraphQLFloat}
+        price: {type: graphql.GraphQLFloat},
+        description: {type: graphql.GraphQLString},
+        image: {type: graphql.GraphQLString}
       },
-      resolve: async (_, {name, release_date, platform, price}) => {
+      resolve: async (_, {name, release_date, platform, price, description, image}) => {
 
         // TODO add validation and error checking
         await db.get().collection('games').insert({
           name: name,
-          image: "",
-          description: "",
+          image: image,
+          description: description,
           release_date: release_date,
           platform: platform,
           price: price
