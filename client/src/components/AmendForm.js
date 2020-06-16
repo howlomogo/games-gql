@@ -166,9 +166,6 @@ class AmendForm extends Component {
               onClick={(e) => {
                 e.preventDefault()
                 updateGame({
-                  refetchQueries: [{
-                    query: GET_GAMES
-                  }],
                   variables: {
                     _id: this.props._id,
                     name: this.state.inputValues.name,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import GameOptions from '../helpers/gameOptions.json'
-import { Mutation } from 'react-apollo'
+import { graphql, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const INSERT_GAME = gql`
@@ -55,7 +55,6 @@ const GET_GAMES = gql`
 class AddModal extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       amendToggled: false,
       addInputValues: {
@@ -92,8 +91,6 @@ class AddModal extends Component {
 
   render() {
     return (
-      <Mutation mutation={INSERT_GAME}>
-        {(insertGame, {data}) => (
           <Modal show={this.props.modalVisible} onHide={this.props.toggleModal}>
             <Modal.Header closeButton>
               <Modal.Title>
@@ -187,10 +184,7 @@ class AddModal extends Component {
                 onClick={(e) => {
                   e.preventDefault()
                   this.props.toggleModal()
-                  insertGame({
-                    refetchQueries: [{
-                      query: GET_GAMES
-                    }],
+                  this.props.mutate({
                     variables: {
                       name: this.state.addInputValues.name,
                       price: this.state.addInputValues.price,
@@ -206,10 +200,34 @@ class AddModal extends Component {
               </button>
             </Modal.Footer>
           </Modal>
-        )}
-      </Mutation>
     )
   }
 }
 
-export default AddModal
+// Need this to get the mutate props. (like redux, think this shold be done wih query also?)
+export default graphql(
+  gql`
+    mutation insertGame(
+      $name: String,
+      $price: Float,
+      $platform: String,
+      $release_date: Int,
+      $description: String,
+      $image: String
+    ) {
+      insertGame(
+        name: $name
+        price: $price,
+        platform: $platform,
+        release_date: $release_date,
+        description: $description,
+        image: $image
+      )
+    }
+  `, {
+    options: {
+      refetchQueries: [
+        `GetGameByIdQuery`
+      ]
+    }
+  })(AddModal)

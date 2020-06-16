@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import gql from 'graphql-tag'
+
 import { Query } from 'react-apollo'
 
 import Nav from './components/Nav'
@@ -150,6 +151,7 @@ class App extends Component {
                               release_date={game.release_date}
                               platform={game.platform}
                               price={game.price}
+                              GET_GAMES={GET_GAMES}
                             />
                           ))}
                           </React.Fragment>
