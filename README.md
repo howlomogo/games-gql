@@ -39,9 +39,3 @@ listedGames (Array)
 To use:
 Create mongodb db gamesdb with collection games
 Run mongodb, run npm server
-
-
-
-
--- Todo
-fix refetchQueries on add, re factor stuff
