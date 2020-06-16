@@ -24,34 +24,6 @@ const INSERT_GAME = gql`
   }
 `;
 
-// Just use to refetch the games after the mutation, we dont really need all this as can do it by id but this is fine for now.
-const GET_GAMES = gql`
-  query GetGameByIdQuery(
-    $name: String,
-    $release_date: Int,
-    $platform: String,
-    $min_price: Float,
-    $max_price: Float
-  ) {
-    game(
-      name: $name,
-      release_date: $release_date,
-      platform: $platform,
-      min_price: $min_price,
-      max_price: $max_price
-    ) {
-      _id
-      name
-      image
-      description
-      release_date
-      platform
-      price
-    }
-  }
-`;
-
-
 class AddModal extends Component {
   constructor(props) {
     super(props)
@@ -205,26 +177,8 @@ class AddModal extends Component {
 }
 
 // Need this to get the mutate props. (like redux, think this shold be done wih query also?)
-export default graphql(
-  gql`
-    mutation insertGame(
-      $name: String,
-      $price: Float,
-      $platform: String,
-      $release_date: Int,
-      $description: String,
-      $image: String
-    ) {
-      insertGame(
-        name: $name
-        price: $price,
-        platform: $platform,
-        release_date: $release_date,
-        description: $description,
-        image: $image
-      )
-    }
-  `, {
+// Issue with mutation component not working with refetch so have used the below. see https://github.com/apollographql/apollo-client/issues/3633
+export default graphql(INSERT_GAME, {
     options: {
       refetchQueries: [
         `GetGameByIdQuery`
