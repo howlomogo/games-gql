@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AmendForm from './AmendForm'
+import RemoveBtn from './RemoveBtn'
 
 class GameTile extends Component {
   constructor() {
@@ -49,7 +50,7 @@ class GameTile extends Component {
               </div>
               <div className='flex-fill text-right'>
                 <a href='#1' className='btn btn-primary mr-2' onClick={() => {this.toggleAmend()}}>Amend Game</a>
-                <a href='#2' className='btn btn-danger'>Remove Game</a>
+                <RemoveBtn _id={this.props._id} />
               </div>
             </div>
           )}
