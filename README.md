@@ -10,13 +10,6 @@ Price (Searchable between min and max)
 
 User can add / amend a game to the database
 
-
-Extensions:
-Add user log in
-User can save games they like and have a (my list of games)
-Add moderator (Only moderator can add games)
-
-
 Types
 - Game
 id (This can be created by mongodb)
@@ -55,3 +48,9 @@ To use:
 - Run `npm run client` - this will open in http://localhost:3000/ and show the application.
 - Currently you can add, remove / update games to the database and also search for the added games based on search input
 
+
+----
+TODO's
+Add user log in with user database
+User can save games they like and have a link to a list of saved games
+Add moderator flag (Only moderators can add games)
