@@ -1,4 +1,4 @@
-Simple GraphQL project with local mongo database, React, Apollo (NOT react hooks version).
+Simple GraphQL project using local mongo database, React, Apollo and Express (NOT react hooks version). Where users can search, add, delete and update games.
 
 Games database
 User can search for games in database with various filters
