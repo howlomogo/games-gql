@@ -37,5 +37,22 @@ listedGames (Array)
 - pagination for list view,
 
 To use:
-Create mongodb db gamesdb with collection games
-Run mongodb, run npm server
+- Install mongodb
+- Run 'mongod' - to start mongodb - running on port `:27017`
+- Create mongodb db called `gamesdb` with collection `games`
+- With schema such as
+```
+{
+    "_id" : ObjectId("5ede365560c3b2b435fcc2a1"),
+    "name" : "Final Fantasy 7",
+    "image" : "https://upload.wikimedia.org/wikipedia/en/c/c2/Final_Fantasy_VII_Box_Art.jpg",
+    "description" : "Final Fantasy VII[a] is a 1997 role-playing video game...",
+    "release_date" : 1997,
+    "platform" : "ps1",
+    "price" : 30
+}
+```
+- Run `npm run server`
+- You can access graphQL on `http://localhost:4000/graphql`
+- Run `npm run client`
+- You can access client on `http://localhost:3000/`
